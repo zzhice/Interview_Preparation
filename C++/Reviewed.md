@@ -5,6 +5,7 @@
  + Design pattern: decorator, factory
  + C++11 characteristic: 
  	+ keyword (noexcept, override)
- 	+ move() vs static_cast<>()
+ 	+ move() vs static_cast<>(), move copy ctor
  	+ constexpr
  	+ lvalues and rvalues
++ Wild pointer
