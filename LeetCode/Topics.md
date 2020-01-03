@@ -1,6 +1,6 @@
 ### Total solved questions 100/1308 (22 uploaded solutions)
 
-+ Notice: Some questions might contain more than one topic, so I choose the topic that includes the key idea of the question.
++ Notice: Some questions might cover more than one topic, so I choose the topic that includes the key idea of the question.
 
 ##Uncategorized
 + 4\. Median of Two Sorted Arrays [H]
