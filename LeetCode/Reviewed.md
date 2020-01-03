@@ -185,10 +185,11 @@ public:
 };
 ```
 
-+ 15\. 3Sum
++ 15\. 3Sum [M]
 + Set one number as constant and traverse the rest to conduct two sum method.
 + Or Sort the array, set one number as constant and traverse the rest to conduct two pointer method.
 	+ Time: O($n^2$). Space: O(n)
++ Keyword: medium, two pointer
 
 ```
 class Solution {
@@ -223,9 +224,426 @@ public:
         }
         return res;
     }
+}; 
+```
+
++ 17\. Letter Combinations of a Phont Number [M]
++ dfs, backtracking
+	+ Time: O($3^N$*$4^M$). Space: O($3^N$\*$4^M$)
++ Keyword: medium, dfs, backtracking
+
+```
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        
+        vector<string> res;
+        if(digits == "")
+            return res;
+        dfs(digits, 0, "", res);
+        
+        return res;
+    }
+    
+    void dfs(string digits, int i, string tmp, vector<string> &res){
+        if(i == digits.size()){
+            res.push_back(tmp);
+            return;
+        }
+        for(int j = 0; j < digToChar[digits[i]].size(); j++){
+            dfs(digits, i+1, tmp+digToChar[digits[i]][j], res);
+        }
+    }
+private:
+    std::unordered_map<char, string> digToChar = {{'2', "abc"}, {'3', "def"}, {'4', "ghi"}, {'5', "jkl"}, {'6', "mno"}, {'7', "pqrs"}, {'8', "tuv"}, {'9', "wxyz"}};
 };
 ```
 
++ 19\.Remove Nth Node From End of List [M]
++ Keyword: medium, two pointer
+
+```
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* root = head;
+        ListNode* prev = head;
+        for(int i = 0; i < n; i++){
+            head = head->next;
+            if(head==NULL)return root->next;
+        }
+        while(1){
+            head = head->next;
+            if(head==NULL){
+                prev->next = prev->next->next;
+                break;
+            }
+            prev = prev->next;
+        }
+        return root;
+    }
+};
+``` 
+
++ 20\.Valid Parentheses [E]
+	+ Use stack, if remain empty(), return true
++ Keyword: easy, stack
+
+```
+class Solution {
+public:
+    bool isValid(string s) {
+        vector<char> stack_set1;
+        for(int i = 0; i < s.size(); i++){
+            
+            if(s[i] == ')'){
+                if(stack_set1.size()==0) return false;
+                if(stack_set1[stack_set1.size()-1] == '(')
+                    stack_set1.pop_back();
+                else
+                    return false;
+            }
+            else if(s[i] == '}'){
+                if(stack_set1.size()==0) return false;
+                if(stack_set1[stack_set1.size()-1] == '{')
+                    stack_set1.pop_back();
+                else
+                    return false;
+            }
+            else if(s[i] == ']'){
+                if(stack_set1.size()==0) return false;
+                if(stack_set1[stack_set1.size()-1] == '[')
+                    stack_set1.pop_back();
+                else
+                    return false;
+            }else
+                stack_set1.push_back(s[i]);
+        }
+        if(stack_set1.size() == 0)
+            return true;
+        else
+            return false;
+        
+    }
+};
+```
+
++ 21\. Merge Two Sorted Lists [E]
+	+ Time: O(max(n, m)). Space: O(1) 
++ Keyword: easy, linked lists
+	
+
+```
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        ListNode* head = new ListNode(0);
+        ListNode* root = head;
+        while(l1 || l2)
+        {
+            if(l1 && l2)
+            {
+                if(l1->val <= l2->val){
+                    head->next = l1;
+                    head = head->next;
+                    l1 = l1->next;
+                }else{
+                    head->next = l2;
+                    head = head->next;
+                    l2 = l2->next;
+                }
+            }
+            if(l1 && !l2)
+            {
+                head->next = l1;
+                    head = head->next;
+                    l1 = l1->next;
+            }
+            if(!l1 && l2)
+            {
+                head->next = l2;
+                    head = head->next;
+                    l2 = l2->next;
+            }
+        }
+        return root->next;
+    }
+};
+```
+
++ 22\. Generate Parentheses [M]
++ Keyword: medium, backtracking
+
+```
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        addingpar(res, "", n, 0);
+        return res;
+    }
+    void addingpar(vector<string> &v, string str, int n, int m){
+        if(n==0 && m==0) {
+            v.push_back(str);
+            return;
+        }
+        if(m > 0){ addingpar(v, str+")", n, m-1); }
+        if(n > 0){ addingpar(v, str+"(", n-1, m+1); }
+    }
+};
+```
+
++ 23\. Merge k Sorted Lists [H]
++ Use priority queue to optimize the comparison process.
+	+ Time: O(Nlogk). Space: O(max(n, k)), where N is the number of nodes and k is the number of linked lists.
++ Keyword: hard, priority queue
+
+```
+class Solution {
+public:
+    ListNode *mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if (NULL == l1) return l2;
+        else if (NULL == l2) return l1;
+        if (l1->val <= l2->val) {
+            l1->next = mergeTwoLists(l1->next, l2);
+            return l1;
+        }
+        else {
+            l2->next = mergeTwoLists(l1, l2->next);
+            return l2;
+        }
+    }
+    ListNode *mergeKLists(vector<ListNode *> &lists) {
+        if (lists.empty()) return NULL;
+        int len = lists.size();
+        while (len > 1) {
+            for (int i = 0; i < len / 2; ++i) {
+                lists[i] = mergeTwoLists(lists[i], lists[len - 1 - i]);
+            }
+            len = (len + 1) / 2;
+        }
+        return lists.front();
+    }
+};
+```
++ 31\. Next Permutation [M]
++ The key is to understand what is permutation. Let's say, if the numbers are stored in descending order, then reverse the array. Otherwise, we do the swapping and reverse the array. See code below to get better understanding.
+	+ Time: O(n). Space: O(1) 
++ Keyword: medium, permutation
+
+```
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int n = nums.size(), k, l;
+    	for (k = n - 2; k >= 0; k--) {
+            if (nums[k] < nums[k + 1]) {
+                break;
+            }
+        }
+    	if (k < 0) {
+    	    reverse(nums.begin(), nums.end());
+    	} else {
+    	    for (l = n - 1; l > k; l--) {
+                if (nums[l] > nums[k]) {
+                    break;
+                }
+            } 
+    	    swap(nums[k], nums[l]);
+    	    reverse(nums.begin() + k + 1, nums.end());
+        }
+    }
+};
+```
+
++ 32\. Longest Valid Parentheses [H]
++ Use stack to store index of invalid parenthesis. Calculate the maxLength starting from the end of string.
+	+ Time: O(n). Space: O(n) 
++ Use two counters left and right to conduct left to right scan and right to left scan.
+	+ Time: O(n). Space: O(1)
++ Keyword: hard, stack
+
+```
+// stack method
+class Solution {
+public:
+    int longestValidParentheses(string s) {
+        int n = s.length(), longest = 0;
+        stack<int> st;
+        for(int i = 0; i < n; i++){
+            if(s[i] == '(') st.push(i);
+            else
+            {
+                if(!st.empty())
+                {
+                    if(s[st.top()] == '(') st.pop();
+                    else st.push(i);
+                }else st.push(i);
+            }
+        }
+        if(st.empty()) longest = n;
+        else{
+            int a = n, b = 0;
+            while(!st.empty()){
+                b = st.top();
+                st.pop();
+                longest = max(longest, a-b-1);
+                a = b;
+            }
+            longest = max(longest, a);
+        }
+        return longest;
+        
+    }
+};
+```  
+
++ 33\. Search in Rotated Sorted Array [M]
++ Use binary search method, and list all possible cases when separating the array.
+	+ Time: O(log(N)). Space O(1).
++ Keyword: medium, binary search
+
+```
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        if(nums.size()==0) return -1;
+        if(nums.size()==1) return nums[0]==target? 0:-1;
+        if(nums.size()==2){
+            if(nums[0]==target) return 0;
+            if(nums[1]==target) return 1;
+            return -1;
+        }
+        return bsearch(0, nums.size()-1, nums, target);
+        
+    }
+    int bsearch(int l, int r, vector<int>& nums, int target){
+        std::cout<<l<<r<<endl;
+        if(target==nums[(l+r)/2]) return (l+r)/2;
+        if(l==r) return -1;
+        if((r-l)==1){
+        if(nums[r]==target) return r;
+            else return -1;
+        }
+        if(target>nums[(l+r)/2] && nums[(l+r)/2] > nums[r])
+            return bsearch((l+r)/2, r, nums, target);
+        else if(target>nums[(l+r)/2] && nums[(l+r)/2] < nums[r]){
+            if(target > nums[r])
+                return bsearch(l, (l+r)/2, nums, target);
+            else return bsearch((l+r)/2, r, nums, target); 
+        }
+        else if(target<nums[(l+r)/2] && nums[(l+r)/2] > nums[r]){
+            if(target > nums[r])
+                return bsearch(l, (l+r)/2, nums, target);
+            else return bsearch((l+r)/2, r, nums, target); 
+        }
+        else if(target<nums[(l+r)/2] && nums[(l+r)/2] < nums[r])
+            return bsearch(l, (l+r)/2, nums, target);
+        return -1;
+        // int l = 0, r = nums.size()-1;
+        // while (l <= r) {
+        //     int mid = (l+r) / 2;
+        //     if (target == nums[mid])
+        //         return mid;
+        //     // there exists rotation; the middle element is in the left part of the array
+        //     if (nums[mid] > nums[r]) {
+        //         if (target < nums[mid] && target >= nums[l])
+        //             r = mid - 1;
+        //         else
+        //             l = mid + 1;
+        //     }
+        //     // there exists rotation; the middle element is in the right part of the array
+        //     else if (nums[mid] < nums[l]) {
+        //         if (target > nums[mid] && target <= nums[r])
+        //             l = mid + 1;
+        //         else
+        //             r = mid - 1;
+        //     }
+        //     // there is no rotation; just like normal binary search
+        //     else {
+        //         if (target < nums[mid])
+        //             r = mid - 1;
+        //         else
+        //             l = mid + 1;
+        //     }
+        // }
+        // return -1;
+    }
+};
+``` 
+
++ 34\. Find First and Last Position of Element in Sorted Array [M]
++ We can find the left and right position of target by switching the calculation of mid value.
+	+ Time: O(log(n)). Space: O(1)
++ Keyword: medium, binary search
+
+```
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int l = 0;
+        int r = nums.size() - 1;
+        vector<int> res(2, -1);
+        // find the left one
+        while(l < r){
+            int mid = (r+l)/2;
+            if(nums[mid] < target) l = mid + 1;
+            else r = mid;
+        }
+        if(nums.size() !=0 && nums[l] == target) res[0] = l;
+        else return res;
+        
+        r = nums.size() - 1;
+        while(l < r){
+            int mid = (r+l)/2 + 1;
+            if(nums[mid] > target) r = mid - 1;
+            else l = mid;
+        }
+        res[1] = l;
+        return res;
+    }
+};
+```   
+
++ 39\. Combination Sum [M]
++ dfs, backtracking
+	+ Time: O($2^n$). Space: O($2^n$)
++ Keyword: medium, dfs, backtracking
+
+```
+class Solution {
+public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> res;
+        vector<int> tmp;
+        if(candidates.empty()){
+            vector<vector<int>> res;
+            return res;
+        }
+        sort(candidates.begin(), candidates.end());
+        find_comb(0, candidates, target, res, tmp);
+        return res;
+    }
+    
+    void find_comb(int index, vector<int>& candidates, int target, vector<vector<int>>& res, vector<int> tmp)
+    {
+        if(target == 0){
+            res.push_back(tmp);
+            return;
+        }
+        for(int i = index; i < candidates.size(); ++i)
+        {
+            if(candidates[i] > target) return;
+            else{
+                vector<int> new_tmp = tmp;
+                new_tmp.push_back(candidates[i]);
+                find_comb(i, candidates, target-candidates[i], res, new_tmp);
+            }
+        }
+    }
+};
+```
+ 
 + 10\. Regular Expression Matching
 
 + 44\. Wildcard Matching
