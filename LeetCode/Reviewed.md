@@ -4,7 +4,7 @@
 	+ Time complexity: O(n) Space complexity: O(n)
 + Keyword: easy, hash table
 
- ```
+ ```cpp
  class Solution {
  public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -29,7 +29,7 @@
 	+ Time: O(max(m,n)). Space O(max(m,n))
 + Keyword: medium, linked list
 
-```
+```cpp
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -67,7 +67,7 @@ public:
 	+ Time: O(n). Space: O(min(m, n))
 + Keyword: medium, sliding window, hash table
 
-```
+```cpp
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
@@ -89,7 +89,7 @@ public:
 	+ Time: O(log(min(m, n))). Space: O(1)
 + Keyword: hard, median
 
-```
+```cpp
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
@@ -126,7 +126,7 @@ public:
 	+ Time: O($n^2$). Space: O($n^2$).
 + Keyword: medium, palindrome, dynamic programming
 
-```
+```cpp
 // Expand from center
 class Solution {
 public:
@@ -162,7 +162,7 @@ public:
 	+ Time: O(n). Space: O(1)
 + Keyword: medium, two pointer
 
-```
+```cpp
 class Solution {
 public:
     int maxArea(vector<int>& height) {
@@ -191,7 +191,7 @@ public:
 	+ Time: O($n^2$). Space: O(n)
 + Keyword: medium, two pointer
 
-```
+```cpp
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& num) {
@@ -232,7 +232,7 @@ public:
 	+ Time: O($3^N$*$4^M$). Space: O($3^N$\*$4^M$)
 + Keyword: medium, dfs, backtracking
 
-```
+```cpp
 class Solution {
 public:
     vector<string> letterCombinations(string digits) {
@@ -262,7 +262,7 @@ private:
 + 19\.Remove Nth Node From End of List [M]
 + Keyword: medium, two pointer
 
-```
+```cpp
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
@@ -289,7 +289,7 @@ public:
 	+ Use stack, if remain empty(), return true
 + Keyword: easy, stack
 
-```
+```cpp
 class Solution {
 public:
     bool isValid(string s) {
@@ -333,7 +333,7 @@ public:
 + Keyword: easy, linked lists
 	
 
-```
+```cpp
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
@@ -374,7 +374,7 @@ public:
 + 22\. Generate Parentheses [M]
 + Keyword: medium, backtracking
 
-```
+```cpp
 class Solution {
 public:
     vector<string> generateParenthesis(int n) {
@@ -398,7 +398,7 @@ public:
 	+ Time: O(Nlogk). Space: O(max(n, k)), where N is the number of nodes and k is the number of linked lists.
 + Keyword: hard, priority queue
 
-```
+```cpp
 class Solution {
 public:
     ListNode *mergeTwoLists(ListNode* l1, ListNode* l2) {
@@ -431,7 +431,7 @@ public:
 	+ Time: O(n). Space: O(1) 
 + Keyword: medium, permutation
 
-```
+```cpp
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
@@ -463,7 +463,7 @@ public:
 	+ Time: O(n). Space: O(1)
 + Keyword: hard, stack
 
-```
+```cpp
 // stack method
 class Solution {
 public:
@@ -503,7 +503,7 @@ public:
 	+ Time: O(log(N)). Space O(1).
 + Keyword: medium, binary search
 
-```
+```cpp
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
@@ -577,7 +577,7 @@ public:
 	+ Time: O(log(n)). Space: O(1)
 + Keyword: medium, binary search
 
-```
+```cpp
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
@@ -610,7 +610,7 @@ public:
 	+ Time: O($2^n$). Space: O($2^n$)
 + Keyword: medium, dfs, backtracking
 
-```
+```cpp
 class Solution {
 public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
