@@ -644,9 +644,100 @@ public:
 };
 ```
  
-+ 10\. Regular Expression Matching
++ 10\. Regular Expression Matching [H]
+	+ Time: O($n^2$). Space: O($n^2$) 
++ Keyword: hard, dynamic programming
 
-+ 44\. Wildcard Matching
+```python
+class Solution(object):
+    def isMatch(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: bool
+        """
+        row = len(p) + 1
+        col = len(s) + 1
+        dp = [ [False for i in range( col ) ] for j in range( row ) ]
+        dp[0][0] = True # dp[0][0] 
+        for i in range( 1, row):
+            dp[i][0] = ( i > 1 ) and p[ i - 1 ] == "*" and dp[ i - 2 ][0]
 
-+ 97\. Interleaving String 
+        for i in range( 1, row ) :
+            for j in range( 1, col ):
+                
+                if p[ i - 1 ] =="*":
+                    dp[i][j] = dp[ i - 2 ][j] or ( p[ i - 2  ] == s[ j - 1 ] or p[ i - 2 ] == ".") and  dp[i][j-1]
+
+                else:
+                    dp[i][j] = ( p[ i - 1 ] == "."  or p[ i - 1 ]  == s[ j - 1 ]) and dp[i-1][j-1]
+
+        return dp[row-1][col-1]
+```
+
++ 44\. Wildcard Matching [H]
+	+ Time: O($n^2$). Space: O($n^2$) 
++ Keyword: dynamic programming
+
+```python
+class Solution(object):
+    def isMatch(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: bool
+        """
+        row = len(p) + 1
+        col = len(s) + 1
+        dp = [ [False for i in range( 0, col )] for j in range( 0, row ) ]
+
+        dp[0][0] = True
+        for j in range(1, col ):
+            dp[0][j] = False
+        for i in range( 1, row):
+            if p[i-1] == "*":
+                dp[i][0] = dp[i-1][0]
+
+        for i in range( 1, row ):
+            for j in range( 1, col ):
+                if p[i-1] == "*":
+                    dp[i][j] = dp[i-1][j] or dp[i][j-1]
+                else:
+                    dp[i][j] = (s[j-1] == p[i-1] or p[i-1] == "?") and dp[i-1][j-1]
+        return dp[row-1][col-1]
+```
+
++ 97\. Interleaving String [H]
+	+ Time: O($n^2$). Space: O($n^2$) 
++ Keyword: dynamic programming
+
+```python
+class Solution(object):
+    def isInterleave(self, s1, s2, s3):
+        """
+        :type s1: str
+        :type s2: str
+        :type s3: str
+        :rtype: bool
+        """
+        row = len(s1) + 1
+        col = len(s2) + 1
+        t = len(s3)
+        if row + col -2 !=t :
+            return False
+        dp = [ [False for j in range(col)] for j in range(row) ]
+        dp[0][0] = True
+        for j in range(1,col):
+            dp[0][j] = dp[0][j-1] and s2[j-1] == s3[j-1]
+        for i in range(1,row):
+            dp[i][0] = dp[i-1][0] and s1[i-1] == s3[i-1]
+
+        for i in range(1,row):
+            for j in range(1,col):
+       
+                dp[i][j] = ( dp[i-1][j] and s1[i-1] == s3[i+j-1]) or (dp[i][j-1] and s2[j-1] == s3[i+j-1])
+        return dp[row-1][col-1]
+```
+
+
 
