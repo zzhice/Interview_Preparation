@@ -5,3 +5,11 @@
  	+ Depth rectification(shift)
  	+ Registration
  	+ Play with it: [Code link](https://github.com/code-iai/iai_kinect2)
+
+ 	
+
+## Multiple Object Tracking
++ [Literature Review](https://arxiv.org/pdf/1409.7618.pdf)
+
+## Person re-identification
++ [OSNet](https://arxiv.org/pdf/1905.00953.pdf)
