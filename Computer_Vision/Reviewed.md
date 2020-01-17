@@ -18,6 +18,7 @@
 
 ## Person re-identification
 + [OSNet](https://arxiv.org/pdf/1905.00953.pdf)
++ [Public dataset](https://robustsystems.coe.neu.edu/sites/robustsystems.coe.neu.edu/files/systems/projectpages/reiddataset.html)
 
 
 ## Generative Models
