@@ -41,6 +41,9 @@
 + 10\. Regular Expression Matching
 + 44\. Wildcard Matching
 + 97\. Interleaving String 
++ 62\. Unique Paths [M]
++ 64\. Minimum Path Sum [M]
++ 72\. Edit Distance [H]
 
 ##design
 
