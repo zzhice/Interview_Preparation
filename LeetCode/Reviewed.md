@@ -740,4 +740,50 @@ class Solution(object):
 ```
 
 
++ 41\. First Missing Positive [H]
+	+ Time: O($n$). Space: O($1$) 
++ Keyword: uncategorized
 
+```cpp
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        
+        int n = nums.size();
+        for (int i = 0; i < n; i++)
+            while(nums[i] > 0 && nums[i] <= n && nums[nums[i] - 1] != nums[i])
+                swap(nums[i], nums[nums[i] - 1]);
+        for (int i = 0; i < n; i++)
+            if (nums[i] != i + 1)
+                return i + 1;
+        return n + 1;
+        
+    }
+};
+```
+
++ 62\. Unique Paths [M]
+    + Time: O($nxn$). Space: O($nxm$) 
++ Keyword: dynamic programming
+
+```cpp
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        std::vector<std::vector<int>> mtx(n, vector<int>(m,0));
+        for(int i = 0; i < m; i++)
+            mtx[0][i] = 1;
+        for(int i = 0; i < n; i++)
+            mtx[i][0] = 1;
+        for(int i = 1; i < n; i++)
+        {
+            for(int j = 1; j < m; j++)
+            {
+                mtx[i][j] = mtx[i-1][j] + mtx[i][j-1];
+            }
+        }
+        return mtx[n-1][m-1];
+    }
+};
+
+```

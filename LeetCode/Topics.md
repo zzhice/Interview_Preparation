@@ -6,6 +6,7 @@
 + 4\. Median of Two Sorted Arrays [H]
 + 5\. Longest Palindromic Substring [M]
 + 31\. Next Permutation [M]
++ 41\. First Missing Positive [H]
 
 ##hash table
 + 1\. Two Sum [E]
