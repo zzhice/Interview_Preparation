@@ -16,16 +16,21 @@
 + [Pedestrian Intention Estimation Datasets](http://openaccess.thecvf.com/content_ICCV_2019/papers/Rasouli_PIE_A_Large-Scale_Dataset_and_Models_for_Pedestrian_Intention_Estimation_ICCV_2019_paper.pdf), ICCV 2019
 
 
+## Image Classification
++ [CSPNet](https://arxiv.org/pdf/1911.11929.pdf)
++ [ResNeXt](https://arxiv.org/pdf/1611.05431.pdf)
 
 ## Feature Detection
 + Harris Corner Detection
 + SIFT (Scale-Invariant Feature Transform), Image pyramid, DOG(Difference of Gaussian)
 
 ## Object Detection
++ One stage detector: [YOLOv4](https://arxiv.org/pdf/2004.10934.pdf)
 + Two stage detector: Faster RCNN
 
 ## Multiple Object Tracking
 + [Literature Review](https://arxiv.org/pdf/1409.7618.pdf)
++ [DeepSORT](https://blog.csdn.net/zjc910997316/article/details/83721573)
 
 ## Person re-identification
 + [OSNet](https://arxiv.org/pdf/1905.00953.pdf)
