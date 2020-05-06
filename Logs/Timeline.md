@@ -5,6 +5,13 @@ Apply for jobs at Snap, Lucid Motor, Inceptio
 
 Study YOLOv4(CSPNet) and finished setting up environement for YOLOv4:
 
+YOLOv4 consists of:
++ Backbone: CSPDarknet53 
++ Neck: SPP, PAN 
++ Head: YOLOv3 
+
+---
+
 + [CSPNet](https://github.com/WongKinYiu/CrossStagePartialNetworks) (Cross Stage Partial Network): 
 + **Advantage**: It's able to reduce computations by 20% with a bit superior accuracy. It can cope with architectures based on ResNet, ResNeXt, and DenseNet.
 + **Methods:** 
@@ -44,7 +51,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64:$LD_LIBRARY_PATH
 
 Apply for jobs at DiDi, Nvidia, Skydio
 
-1) Study YOLOv4(SPP, SAM)
+1) Study YOLOv4(SPP)
 2) update Leetcode folder
 
 + [SPP](https://arxiv.org/pdf/1406.4729.pdf) (Spatial Pyramid Pooling):
@@ -53,4 +60,58 @@ Apply for jobs at DiDi, Nvidia, Skydio
 + !["SPP"](4.PNG )
 + How do we train the SPP? We train each full epoch on one network, and then switch to the other one (keeping all weights) for the next full epoch...Author shows the example of training R-CNN with SPP in the paper.
 
-+ [SAM](https://arxiv.org/pdf/1807.06521.pdf)(Spatial attention module):
+05/06/2020
+
+Apply for jobs at WeRide, Zoox, Voyage, Kwai, Pony
+
+1) Study YOLOv4(SAM, PANet, YOLOv3)
+2) Read the code of YOLOv4
+
++ [SAM](https://arxiv.org/pdf/1807.06521.pdf)(Spatial attention module): 
++ Add the SAM on the convolution output in each block.
++ !["SAM"](5.PNG)
+
+```python
+def CBAM(input, reduction):
+    """
+    @Convolutional Block Attention Module
+    """
+
+    _, width, height, channel = input.get_shape()  # (B, W, H, C)
+
+    # channel attention
+    x_mean = tf.reduce_mean(input, axis=(1, 2), keepdims=True)   # (B, 1, 1, C)
+    x_mean = tf.layers.conv2d(x_mean, channel // reduction, 1, activation=tf.nn.relu, name='CA1')  # (B, 1, 1, C // r)
+    x_mean = tf.layers.conv2d(x_mean, channel, 1, name='CA2')   # (B, 1, 1, C)
+
+    x_max = tf.reduce_max(input, axis=(1, 2), keepdims=True)  # (B, 1, 1, C)
+    x_max = tf.layers.conv2d(x_max, channel // reduction, 1, activation=tf.nn.relu, name='CA1', reuse=True)
+    # (B, 1, 1, C // r)
+    x_max = tf.layers.conv2d(x_max, channel, 1, name='CA2', reuse=True)  # (B, 1, 1, C)
+
+    x = tf.add(x_mean, x_max)   # (B, 1, 1, C)
+    x = tf.nn.sigmoid(x)        # (B, 1, 1, C)
+    x = tf.multiply(input, x)   # (B, W, H, C)
+
+    # spatial attention
+    y_mean = tf.reduce_mean(x, axis=3, keepdims=True)  # (B, W, H, 1)
+    y_max = tf.reduce_max(x, axis=3, keepdims=True)  # (B, W, H, 1)
+    y = tf.concat([y_mean, y_max], axis=-1)     # (B, W, H, 2)
+    y = tf.layers.conv2d(y, 1, 7, padding='same', activation=tf.nn.sigmoid)    # (B, W, H, 1)
+    y = tf.multiply(x, y)  # (B, W, H, C)
+
+    return y
+
+```
+
+
++ [PANet](https://arxiv.org/pdf/1803.01534.pdf)(Path Aggregation Network for Instance Segmentation):
++ Three improvements from Mask-RCNN to PANet
+  + Add bottom-up path augmentation to FPN.
+  + Adpative feature pooling: Originally we select the ROI features from one of feature maps from p2 to p5, depending on the size of ROI. The author argues that selecting from all levels of feautre maps is able to capture richer context information.
+  + Fully-connected Fusion:(skip)
++ !["PANet"](6.PNG)
+
++ Since the head of YOLOv3 is used in v4, I add one pic from [link](https://zhuanlan.zhihu.com/p/76802514) to recap.
++ !["YOLOv3"](7.jpg)
+
