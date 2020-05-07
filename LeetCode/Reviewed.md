@@ -787,3 +787,186 @@ public:
 };
 
 ```
+
++ 64\. Minimum Path Sum [M]
+    + Time: O($nxn$). Space: O($nxm$) 
++ Keyword: dynamic programming
+
+```cpp
+class Solution {
+public:
+    int minPathSum(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        std::vector<std::vector<int>> mtx(m, std::vector<int>(n, 0));
+        mtx[0][0] = grid[0][0];
+        for(int i = 1; i < m; i++)
+            mtx[i][0] = grid[i][0] + mtx[i-1][0];
+        for(int i = 1; i < n; i++)
+            mtx[0][i] = grid[0][i] + mtx[0][i-1];
+        for(int i = 1; i < m; i++)
+        {
+            for(int j = 1; j < n; j++)
+            {
+                mtx[i][j] = min(mtx[i-1][j], mtx[i][j-1]) + grid[i][j];
+            }
+        }
+        return mtx[m-1][n-1];
+    }
+};
+
+```
+
++ 72\. Edit Distance [H]
+    + Time: O($nxn$). Space: O($nxm$) 
++ Keyword: dynamic programming
+
+```cpp
+class Solution {
+public:
+    int minDistance(string word1, string word2) {
+        int m = word1.size();
+        int n = word2.size();
+        vector<vector<int>> dp(m+1, vector<int>(n+1, 0));
+        for(int i = 1; i <= m; i++)
+            dp[i][0] = i;
+        for(int j = 1; j <= n; j++)
+            dp[0][j] = j;
+        for(int i = 1; i <= m; i++)
+        {
+            for(int j = 1; j <= n; j++)
+            {
+                if(word1[i-1] == word2[j-1])
+                    dp[i][j] = dp[i-1][j-1];
+                else
+                    dp[i][j] = min(dp[i-1][j-1]+1, min(dp[i-1][j], dp[i][j-1])+1);
+                    
+            }
+        }
+        return dp[m][n];
+    }
+};
+
+```
+
+
++ 78\. Subsets [M]
+    + Time: O(Nx2<sup>N</sup>). Space: O(Nx2<sup>N</sup>) 
++ Keyword: cascading, backtracking
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> subs = {{}};
+        for (auto num : nums) {
+            int n = subs.size();
+            for (int i = 0; i < n; i++) {
+                subs.push_back(subs[i]); 
+                subs.back().push_back(num);
+            }
+        }
+        return subs;
+    }
+};
+
+```
+
+```python
+
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        def backtrack(first = 0, curr = []):
+            # if the combination is done
+            if len(curr) == k:  
+                output.append(curr[:]) # deep copy
+            for i in range(first, n):
+                # add nums[i] into the current combination
+                curr.append(nums[i])
+                # use next integers to complete the combination
+                backtrack(i + 1, curr)
+                # backtrack
+                curr.pop()
+        
+        output = []
+        n = len(nums)
+        for k in range(n + 1):
+            backtrack()
+        return output
+
+```
+
++ 75\. Sort Colors [M]
+    + Time: O(N). Space: O(1) 
++ Keyword: one pass
+
+```cpp
+class Solution {
+  public:
+  /*
+  Dutch National Flag problem solution.
+  */
+  void sortColors(vector<int>& nums) {
+    // for all idx < p0 : nums[idx < p0] = 0
+    // curr is an index of element under consideration
+    int p0 = 0, curr = 0;
+    // for all idx > p2 : nums[idx > p2] = 2
+    int p2 = nums.size() - 1;
+
+    while (curr <= p2) {
+      if (nums[curr] == 0) {
+        swap(nums[curr++], nums[p0++]);
+      }
+      else if (nums[curr] == 2) {
+        swap(nums[curr], nums[p2--]);
+      }
+      else curr++;
+    }
+  }
+};
+
+```
+
++ 79\. Word Search [M]
+    + Time: O(Nx4<sup>L</sup>). Space: O(L). L is the length of the word. 
++ Keyword: backtracking.
+
+```cpp
+class Solution {
+public:
+    bool exist(vector<vector<char>>& board, string word) {
+        
+        for(int i = 0; i < board.size(); i++){
+            for(int j = 0; j < board[0].size(); j++){
+                    if(find(board, word, i, j)){
+                        return true;
+                    }
+            }
+        }
+        return false;
+    }
+    
+    bool find(vector<vector<char>>& board, string word, int i, int j){
+        if(i < 0 || i >= board.size() || j < 0 || j >= board[0].size())
+            return false;
+        if(board[i][j] == '.')
+            return false;
+        
+        if(board[i][j] == word[0]){
+            char tmp = board[i][j];
+            board[i][j] = '.';
+            if(word.length() == 1) return true;
+            word.erase(0, 1);
+            if(find(board, word, i-1, j) || find(board, word, i, j-1) || find(board, word, i+1, j) || find(board, word, i, j+1)) return true;
+            board[i][j] = tmp;
+            return false;
+            
+        }else{
+            return false;
+        }
+    }
+};
+
+
+
+```

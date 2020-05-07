@@ -7,6 +7,7 @@
 + 5\. Longest Palindromic Substring [M]
 + 31\. Next Permutation [M]
 + 41\. First Missing Positive [H]
++ 75\. Sort Colors [M]
 
 ##hash table
 + 1\. Two Sum [E]
@@ -28,6 +29,8 @@
 + 17\. Letter Combinations of a Phont Number [M]
 + 22\. Generate Parentheses [M]
 + 39\. Combination Sum [M]
++ 78\. Subsets [M]
++ 79\. Word Search [M]
 
 ##two pointer
 + 11\. Container With Most Water [M]

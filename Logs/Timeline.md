@@ -52,7 +52,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64:$LD_LIBRARY_PATH
 Apply for jobs at DiDi, Nvidia, Skydio
 
 1) Study YOLOv4(SPP)
-2) update Leetcode folder
+2) Leetcode update
 
 + [SPP](https://arxiv.org/pdf/1406.4729.pdf) (Spatial Pyramid Pooling):
 + SPP eliminate the requirements of the fixed input size of the existed deep neural networks by generating a fixed-length representation regardless of image size/scale. It has been shown to be robust to object deformation.
@@ -66,6 +66,7 @@ Apply for jobs at WeRide, Zoox, Voyage, Kwai, Pony
 
 1) Study YOLOv4(SAM, PANet, YOLOv3)
 2) Read the code of YOLOv4
+3) Leetcode update (78. Subsets, 75. Sort Colors, 79. Word Search)
 
 + [SAM](https://arxiv.org/pdf/1807.06521.pdf)(Spatial attention module): 
 + Add the SAM on the convolution output in each block.
