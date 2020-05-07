@@ -1,4 +1,4 @@
-### Total solved questions 100/1308 (22 uploaded solutions)
+### Total solved questions 107/1308 (28 uploaded solutions)
 
 + Notice: Some questions might cover more than one topic, so I choose the topic that includes the key idea of the question.
 
