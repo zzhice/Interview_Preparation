@@ -116,3 +116,8 @@ def CBAM(input, reduction):
 + Since the head of YOLOv3 is used in v4, I add one pic from [link](https://zhuanlan.zhihu.com/p/76802514) to recap.
 + !["YOLOv3"](7.jpg)
 
+05/07/2020
+
+Apply for jobs at TuSimple, ByteDance
+
+1) Working on my reid research.
