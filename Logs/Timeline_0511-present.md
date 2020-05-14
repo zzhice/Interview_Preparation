@@ -8,3 +8,7 @@ Apply for jobs at Rivian, Kneron.
 05/12/2020
 
 1) HackerRank update 14/69 solved
+
+05/13/2020 - 05/15/2020
+
+1) Get started with interviews. 
