@@ -12,3 +12,15 @@ Apply for jobs at Rivian, Kneron.
 05/13/2020 - 05/14/2020
 
 1) Get started with interviews. 
+
+05/15/2020
+
+1） Have a break
+
+05/16/2020
+
+1) HackerRank update 
+
+05/17/2020
+
+1) HackerRank update 24/69 solved
