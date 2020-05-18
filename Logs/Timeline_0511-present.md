@@ -23,4 +23,4 @@ Apply for jobs at Rivian, Kneron.
 
 05/17/2020
 
-1) HackerRank update 24/69 solved
+1) HackerRank update 28/69 solved. (array, hash maps, string, sorting, dp)
