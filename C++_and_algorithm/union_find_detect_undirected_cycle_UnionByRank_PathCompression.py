@@ -42,7 +42,13 @@ class Graph:
                 if x == y:
                     return True
                 self.union(subsets, x, y)
+                
 g = Graph(3)
 g.addEdge(0, 1)
 g.addEdge(1, 2)
 g.addEdge(2, 0)
+
+if g.isCyclic():
+    print("Graph contains cycle.")
+else:
+    print("Graph does not contain cycle.")
